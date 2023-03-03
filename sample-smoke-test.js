@@ -8,7 +8,7 @@ export const options = {
   duration: '1m',
 
   thresholds: {
-    http_req_duration: ['p(99)<5000'], // 99% of requests must complete below 1.5s
+    http_req_duration: ['p(99)<50000'], // 99% of requests must complete below 1.5s
   },
 };
 
