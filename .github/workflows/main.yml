@@ -1,5 +1,5 @@
-
 name: Load testing workflow
+
 on: [push, workflow_dispatch]
 
 jobs:
@@ -7,9 +7,23 @@ jobs:
     name: Run load test
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - 
+        name: Checkout
         uses: actions/checkout@v2
-      - name: Run k6 local test
+      - 
+        name: Run k6 local test
         uses: k6io/action@v0.1
         with:
           filename: script.js
+      -
+        name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          tags: rahmansopiann/k6-peformancetest:latest
